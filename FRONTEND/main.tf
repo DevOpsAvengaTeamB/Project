@@ -1,6 +1,6 @@
 
-resource "aws_security_group" "default" {
-  name        = "instance_sg"
+resource "aws_security_group" "frontend" {
+  name        = "frontend_sg"
   vpc_id      = "${}"      !!!!!!!
 
  
@@ -33,7 +33,7 @@ resource "aws_instance" "web" {
   instance_type = "t2.micro"
   ami = "${var.aws_ami}"
   key_name = "${var.key_name}"
-  vpc_security_group_ids = ["${aws_security_group.default.id}"]
+  vpc_security_group_ids = ["${aws_security_group.frontend.id}"]
   subnet_id              = "${}"   !!!!!
   user_data              = "${file("userdata.sh")}"
   tags = {
