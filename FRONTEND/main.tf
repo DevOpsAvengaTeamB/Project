@@ -36,5 +36,6 @@ resource "aws_instance" "web" {
   vpc_security_group_ids = ["${aws_security_group.default.id}"]
   subnet_id              = "${}"   !!!!!
   user_data              = "${file("userdata.sh")}"
-
+  tags = {
+    Name = "web_server"
   }
