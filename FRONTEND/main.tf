@@ -34,7 +34,7 @@ resource "aws_instance" "web" {
   ami = "${var.aws_ami}"
   key_name = "${var.key_name}"
   vpc_security_group_ids = ["${aws_security_group.frontend.id}"]
-  subnet_id              = "${}"   !!!!!
+  subnet_id              = "${var.private_subnet_name}"   
   user_data              = "${file("userdata.sh")}"
   tags = {
     Name = "web_server"
