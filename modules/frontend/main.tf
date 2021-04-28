@@ -1,14 +1,13 @@
-
 resource "aws_security_group" "frontend" {
   name        = "frontend_sg"
-  vpc_id      = "${}"      !!!!!!!
+  vpc_id      = var.vpc-id      
 
  
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = "$(var.cidr)"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   
@@ -31,11 +30,12 @@ resource "aws_security_group" "frontend" {
 
 resource "aws_instance" "web" {
   instance_type = "t2.micro"
-  ami = "${var.aws_ami}"
-  key_name = "${var.key_name}"
-  vpc_security_group_ids = ["${aws_security_group.frontend.id}"]
-  subnet_id              = "${var.private_subnet_name}"   
-  user_data              = "${file("userdata.sh")}"
+  ami = var.aws_ami
+  #key_name = "aws"
+  vpc_security_group_ids = [aws_security_group.frontend.id]
+  subnet_id              = var.subnet-pub-a-id
+  user_data              = file("/home/mgavrysh/gitprog/Project/FRONTEND/userdata.sh")
   tags = {
     Name = "web_server"
   }
+}
