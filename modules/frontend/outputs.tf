@@ -1,6 +1,6 @@
 variable "vpc-id" {
   type = string
 }
-variable "subnet-pub-a-id"{
+variable "subnet-priv-a-id" {
   type = string
 }

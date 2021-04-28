@@ -7,7 +7,7 @@ resource "aws_security_group" "frontend" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["192.168.0.0/16"]
   }
 
   
@@ -33,7 +33,7 @@ resource "aws_instance" "web" {
   ami = var.aws_ami
   #key_name = "aws"
   vpc_security_group_ids = [aws_security_group.frontend.id]
-  subnet_id              = var.subnet-pub-a-id
+  subnet_id              = var.subnet-priv-a-id
   user_data              = file("/home/mgavrysh/gitprog/Project/FRONTEND/userdata.sh")
   tags = {
     Name = "web_server"

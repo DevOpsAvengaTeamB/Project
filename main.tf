@@ -13,5 +13,5 @@ module "network" {
 module "frontend" {
   source = "./modules/frontend/"
   vpc-id = module.network.vpc-id
-  subnet-pub-a-id = module.network.subnet-pub-a-id
+  subnet-priv-a-id = module.network.subnet-priv-a-id
 }
