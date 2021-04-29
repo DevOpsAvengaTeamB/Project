@@ -1,15 +1,7 @@
-variable "cluster_name" {
-    description = "The name for all monitoring resources"
-    type= string
-}
-
-variable "instance_count"{
-    description="Count of instances"
-    type=number
-
 variable "ami" {
-    description="The type of ami"
+    description="The type of ami (Ubuntu 20.04 )"
     type = string
+    default="ami-0767046d1677be5a0"
 }
 
 variable "instance_type" {
@@ -17,18 +9,19 @@ variable "instance_type" {
     type = string
 }
 
+/*
 variable "subnet" {
     description = "Location in runge of subnets"
     type = string
 }
 
+variable "vpc_id" {
+    description = "ID vpc"
+    type = string
+}
+*/
+
 variable "security_group"{
     description ="ID security group"
     type= string
-}
-
-variable "security_group_rules" {
-    description="My rules in the security group"
-    type=list
-
 }
