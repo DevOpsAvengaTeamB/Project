@@ -7,14 +7,23 @@ provider "aws" {
 terraform {
   required_version = "> 0.12.08"
 }
+
 module "network" {
   source          = "./modules/network/"
 }
+  
+module "security" {
+  source = "./modules/security/"
+  vpc-id = module.network.vpc-id
+  all-ip = module.network.all-ip
+}
+    
 module "frontend" {
   source = "./modules/frontend/"
   vpc-id = module.network.vpc-id
   subnet-priv-a-id = module.network.subnet-priv-a-id
 }
+    
 module "monitoring_loging"{
     source = "./modules/monitoringloging"
     #version = "0.1"
