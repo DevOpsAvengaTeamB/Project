@@ -21,7 +21,7 @@ variable "vpc_id" {
 }
 */
 
-variable "security_group"{
+variable "security_groups"{
     description ="ID security group"
     type= string
 }
