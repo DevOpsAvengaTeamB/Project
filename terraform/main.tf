@@ -23,6 +23,13 @@ module "frontend" {
   vpc-id = module.network.vpc-id
   subnet-priv-a-id = module.network.subnet-priv-a-id
 }
+#module "backend" {
+#  source = "./modules/Backend/"
+#  vpc-id = module.network.vpc-id
+#  subnet-priv-a-id = module.network.subnet-priv-a-id
+#  subnet-priv-b-id = module.network.subnet-priv-b-id
+#  web_private_ip = module.frontend.web_private_ip    
+#  }
 
     
 /*module "monitoring_loging"{
