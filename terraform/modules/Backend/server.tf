@@ -12,7 +12,7 @@ resource "aws_security_group" "backend"{
  from_port = 8080
  to_port = 8080
  protocol = "tcp"
- cidr_blocks = ["${aws_instance.web.private_ip}/32"] 
+ cidr_blocks = ["${var.web_private_ip}/32"] 
  }
  egress {
     from_port   = 0
@@ -30,6 +30,7 @@ resource "aws_instance" "Backend" {
  instance_type = "t2.micro"
  #key_name = "2vn"
  subnet_id = var.subnet-priv-a-id
+ user_data = file("./userdata.sh")
  vpc_security_group_ids = [aws_security_group.backend.id]
  tags ={
  Name = "backend"
