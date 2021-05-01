@@ -34,7 +34,7 @@ resource "aws_instance" "web" {
   #key_name = "aws"
   vpc_security_group_ids = [aws_security_group.frontend.id]
   subnet_id              = var.subnet-priv-a-id
-  user_data              = file("./userdata.sh")
+  user_data              = file("modules/frontend/userdata.sh")
   tags = {
     Name = "web_server"
   }
