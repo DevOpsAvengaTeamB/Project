@@ -26,5 +26,5 @@ output "subnet-priv-b-id" {
 }
 output "all-ip" {
   description = "CIDR block 0.0.0.0/0"
-  value       = "${var.all-ips}"
+  value       = "${var.all-ip}"
 }

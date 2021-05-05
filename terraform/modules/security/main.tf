@@ -27,6 +27,30 @@ resource "aws_security_group" "bastion-access" {
   }
 }
 
+
+# CREATE SECURITY GROUPS WITH RULES
+# security group allows remote connection to bastion host
+resource "aws_security_group" "elb" {
+  name        = "elb-access"
+  description = "Allow access elb"
+  vpc_id      = var.vpc-id
+  tags = {
+    Name = "${var.sg-name[3]}"
+  }
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["${chomp(data.http.my-ipaddress.body)}/32"]
+    description = "Allow 80 port for my ip"
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
 # security group allows connection to private area hosts from bastion over SSH
 resource "aws_security_group" "private-access" {
   name        = "private-access"

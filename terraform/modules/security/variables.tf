@@ -8,13 +8,14 @@ variable "sg-name" {
   default = [
     "bastion-access",
     "private-access",
-    "jenkins"
+    "jenkins",
+    "elb"
   ]
   description = "List of security group's names"
 }
 variable "key-name" {
   type        = string
-  default     = "key"
+  default     = "public"
   description = "Key pair name"
 }
 #variable "pub-key" {

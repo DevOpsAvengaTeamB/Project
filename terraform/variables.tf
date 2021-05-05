@@ -4,11 +4,13 @@ variable "aws-region" {
   description = "AWS region"
 }
 
-#variable "secret_key" {
-#  description = ""
-#}
+variable "secret_key" {
+  description = ""
+}
 
-#variable "access_key" {
-#  description = ""
-#}
+variable "access_key" {
+  description = ""
+}
+variable "jenkins_user" {}
+variable "jenkins_pass" {}
 

@@ -14,3 +14,7 @@ output "id-sg-jenkins" {
   description = "The ID of security group for Jenkins"
   value       = aws_security_group.jenkins.id
 }
+output "id-sg-elb" {
+  description = "The ID of security group for Jenkins"
+  value       = aws_security_group.elb.id
+}
