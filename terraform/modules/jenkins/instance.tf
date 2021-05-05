@@ -10,7 +10,7 @@ resource "aws_launch_template" "jenkins-launch-tmpl" {
   name                    = "Jenkins"
   image_id                = var.instance-ami[1]
   instance_type           = var.instance-type[1]
-  key_name                = var.key-name
+  #key_name                = var.key-name
   vpc_security_group_ids  = ["${var.id-sg-jenkins}", "${var.id-sg-private}"]
   disable_api_termination = true
 
