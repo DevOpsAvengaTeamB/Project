@@ -50,7 +50,7 @@ resource "aws_launch_configuration" "frontend" {
   image_id = data.aws_ami.ubuntu.id 
   instance_type = "t2.micro"
   security_groups = [aws_security_group.frontend.id]
-  key_name = "key"
+  #key_name = "key"
   user_data = "${data.template_file.user_data.rendered}"
   #user_data = file("./modules/frontend/userdata.sh")
   iam_instance_profile = aws_iam_instance_profile.front_profile.id
