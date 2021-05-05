@@ -52,6 +52,12 @@ module "frontend" {
   source = "./modules/frontend/"
   vpc-id = module.network.vpc-id
   subnet-priv-a-id = module.network.subnet-priv-a-id
+  subnet-priv-b-id = module.network.subnet-priv-b-id
+  subnet-pub-a-id = module.network.subnet-pub-a-id
+  subnet-pub-b-id = module.network.subnet-pub-b-id
+  alb-id = module.jenkins.alb-id
+  alb-arn = module.jenkins.alb-arn
+  aws_alb_listener-arn =  module.jenkins.aws_alb_listener-arn
 }
 #module "backend" {
 #  source = "./modules/Backend/"
