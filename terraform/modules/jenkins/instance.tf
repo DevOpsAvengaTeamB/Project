@@ -85,7 +85,7 @@ resource "aws_alb_listener" "alb_jenkins_http" {
     type             = "forward"
   }
 
-  count = trimspace(element(split(",", var.alb_protocols), 1)) == "HTTP" || trimspace(element(split(",", var.alb_protocols), 2)) == "HTTP" ? 1 : 0
+  #count = trimspace(element(split(",", var.alb_protocols), 1)) == "HTTP" || trimspace(element(split(",", var.alb_protocols), 2)) == "HTTP" ? 1 : 0
 }
 
 resource "aws_autoscaling_attachment" "asg_attachment"{
