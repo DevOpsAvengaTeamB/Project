@@ -6,7 +6,7 @@ resource "aws_security_group" "backend"{
  from_port = 22
  to_port = 22
  protocol = "tcp"
- cidr_blocks = ["${aws_instance.Bastion.private_ip}/32"]
+ cidr_blocks = ["192.168.0.0/16"]
  }
  ingress {
  from_port = 8080
