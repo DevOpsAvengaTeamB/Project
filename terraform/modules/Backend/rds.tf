@@ -23,7 +23,7 @@ resource "random_password" "password" {
 }
 
 resource "aws_db_subnet_group" "DB_subnet" {
-  subnet_ids = [aws_subnet.subnet-priv-a.id, aws_subnet.subnet-priv-b.id]
+  subnet_ids = [subnet-priv-a-id, subnet-priv-b-id]
 
   tags = {
     Name = "My DB subnet group"
