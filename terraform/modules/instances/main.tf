@@ -8,7 +8,7 @@ resource "aws_launch_template" "dos-bastion-launch-tmpl" {
   name          = "${var.name-tag[0]}"
   image_id      = "${var.instance-ami[0]}"
   instance_type = "${var.instance-type[0]}"
-  key_name      = "${var.key-name}"
+  #key_name      = "${var.key-name}"
   vpc_security_group_ids = [
     "${var.id-sg-bastion}"
   ]
