@@ -1,4 +1,4 @@
-output "DBpassword" {
+/*output "DBpassword" {
   value = aws_db_instance.postgresql.password
 }
 
@@ -11,4 +11,4 @@ output "DB" {
   value = aws_db_instance.postgresql.address
   description = "Private ip of db"
 }
-
+*/
