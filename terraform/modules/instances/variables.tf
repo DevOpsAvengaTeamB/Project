@@ -3,7 +3,7 @@
 # [1] - for Ubuntu 20.04
 # [2] - for RHEL 8
 variable "instance-ami" {
-  type = "list"
+  type = list(string)
   default = [
     "ami-0f8e9f8dde1600888",
     "ami-0d6aecf0f0425f42a",
@@ -16,7 +16,7 @@ variable "instance-ami" {
 # [1] - t.medium
 # [2] - t.xlarge
 variable "instance-type" {
-  type = "list"
+  type = list(string)
   default = [
     "t2.micro",
     "t2.medium",
@@ -24,7 +24,7 @@ variable "instance-type" {
   ]
 }
 variable "name-tag" {
-  type = "list"
+  type = list(string)
   default = [
     "dos-bastion"
   ]
@@ -33,7 +33,7 @@ variable "name-prefix" {
   default = "launch-temlate"
 }
 variable "userdata-path" {
-  type    = "string"
+  type    = string
   default = "./userdata-templates/"
 }
 variable "key-name" {

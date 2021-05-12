@@ -73,7 +73,11 @@ module "backend" {
    
 module "monitoring_loging"{
     source = "./modules/monitoring"
+<<<<<<< Updated upstream
     #version = "0.3"
+=======
+    #version = "0.1"
+>>>>>>> Stashed changes
     vpc_id = module.network.vpc-id
     subnet_id = module.network.subnet-priv-a-id
   }

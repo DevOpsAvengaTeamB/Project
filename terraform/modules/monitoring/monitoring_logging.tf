@@ -1,5 +1,5 @@
 resource "aws_security_group" "monitoring" {
-  name="Monitoring"
+  name="Monitoring_Bravo"
   description="Monitoring and logging"
   vpc_id=var.vpc_id
   ingress {
@@ -121,6 +121,6 @@ resource "aws_instance" "ec2_instance_logging" {
     user_data=file("${path.module}/elasticsearch.sh")
 
     tags={
-        Name="Logging Instance"
+        Name="elk-stack"
     }
 }
