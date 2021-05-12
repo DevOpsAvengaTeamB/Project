@@ -22,3 +22,4 @@ output "security_group_id" {
     description= "ID of monitoring security group "
     value="${aws_security_group.monitoring.id}"
 }
+

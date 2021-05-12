@@ -2,7 +2,6 @@ resource "aws_security_group" "monitoring" {
   name="Monitoring"
   description="Monitoring and logging"
   vpc_id=var.vpc_id
-
   ingress {
     protocol  = "-1"
     self      = true
@@ -86,35 +85,42 @@ resource "aws_security_group" "monitoring" {
   tags={
     Name="monitoring_scgroup"
   }
-
 }
 
+/*data "aws_subnet_ids" "private"{
+  vpc_id=var.vpc_id
+  tags = {
+    Tier = "Private"
+  }
+}
+*/
+
 resource "aws_instance" "ec2_instance_monitoring" {
+    #for_each = data.aws_subnet_ids.private.ids
     ami=var.ami
     instance_type=var.instance_type
     #key_name="${aws_key_pair.ssh.id}"
     vpc_security_group_ids=["${aws_security_group.monitoring.id}"]
     subnet_id=var.subnet_id
     monitoring=true
-    user_data="${file("prometheus.sh")}"
+    user_data=file("${path.module}/prometheu.sh")
 
     tags={
         Name="prometheus-server"
     }
-
 }
 
 resource "aws_instance" "ec2_instance_logging" {
+    #for_each = data.aws_subnet_ids.private.ids
     ami=var.ami
     instance_type=var.instance_type
     #key_name="${aws_key_pair.ssh.id}"
     vpc_security_group_ids=["${aws_security_group.monitoring.id}"]
-    subnet_id=var.subnet_id
+    ubnet_id=var.subnet_id
     monitoring=true
-    user_data="${file("elk.sh")}"
+    user_data=file("${path.module}/elasticsearch.sh")
 
     tags={
         Name="Logging Instance"
     }
-
 }

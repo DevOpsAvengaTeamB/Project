@@ -4,9 +4,9 @@ variable "vpc_id" {
 }
 
 variable "ami" {
-    description="The type of ami (Ubuntu 20.04 )"
+    description="The type of ami (Ubuntu 20.04 ) eu-west-3"
     type = string
-    default="ami-0767046d1677be5a0"
+    default="ami-0f7cd40eac2214b37"
 }
 
 variable "instance_type" {
@@ -15,6 +15,20 @@ variable "instance_type" {
     default="t2.medium"
 }
 
-variable "subnet_id" {
-    description = "Location in runge of subnets"
+variable "subnet_id"{
+    description="Runge
 }
+
+/*
+variable "subnet-priv-a-id" {
+    description = "Location in a private subnet"
+    type=string
+}
+
+variable "subnet-priv-b-id" {
+    description = "Location in b private subnet"
+    type=string
+}
+*/
+
+
