@@ -6,7 +6,7 @@ resource "aws_security_group" "For_RDS"{
  from_port = 5432
  to_port = 5432
  protocol = "tcp"
- cidr_blocks = ["${aws_instance.Backend.private_ip}/32"]
+ cidr_blocks = ["192.168.0.0/16"]
  }
 
  vpc_id = var.vpc-id

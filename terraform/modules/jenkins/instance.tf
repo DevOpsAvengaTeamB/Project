@@ -10,7 +10,7 @@ resource "aws_launch_template" "jenkins-launch-tmpl" {
   name                    = "Jenkins"
   image_id                = var.instance-ami[1]
   instance_type           = var.instance-type[1]
-  key_name                = var.key-name
+  #key_name                = var.key-name
   vpc_security_group_ids  = ["${var.id-sg-jenkins}", "${var.id-sg-private}"]
   disable_api_termination = true
 
@@ -85,7 +85,7 @@ resource "aws_alb_listener" "alb_jenkins_http" {
     type             = "forward"
   }
 
-  count = trimspace(element(split(",", var.alb_protocols), 1)) == "HTTP" || trimspace(element(split(",", var.alb_protocols), 2)) == "HTTP" ? 1 : 0
+  #count = trimspace(element(split(",", var.alb_protocols), 1)) == "HTTP" || trimspace(element(split(",", var.alb_protocols), 2)) == "HTTP" ? 1 : 0
 }
 
 resource "aws_autoscaling_attachment" "asg_attachment"{
