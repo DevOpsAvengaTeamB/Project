@@ -3,7 +3,7 @@ variable "aws-region" {
   type        = "string"
   description = "AWS region"
 }
-
+/*
 variable "secret_key" {
   description = ""
 }
@@ -11,6 +11,7 @@ variable "secret_key" {
 variable "access_key" {
   description = ""
 }
+*/
 variable "jenkins_user" {}
 variable "jenkins_pass" {}
 
