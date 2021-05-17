@@ -61,6 +61,7 @@ module "frontend" {
   alb-arn = module.jenkins.alb-arn
   aws_alb_listener-arn =  module.jenkins.aws_alb_listener-arn
 }
+/*    
 module "backend" {
   source = "./modules/Backend/"
   vpc-id = module.network.vpc-id
@@ -78,4 +79,4 @@ module "backend" {
     #version = "0.1"
     vpc_id = module.network.vpc-id
     subnet = module.network.subnet-priv-a-id
-  }*/
+  } */
