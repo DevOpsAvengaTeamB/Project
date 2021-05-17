@@ -34,12 +34,10 @@ EOF
 
 #chown jenkins:jenkins /var/lib/jenkins/init.groovy.d/basic-security.groovy
 
-systemctl enable jenkins.service
-systemctl start jenkins.service
+systemctl restart jenkins.service
+cp /var/cache/jenkins/war/WEB-INF/lib/cli-2.277.4.jar /tmp/cli-2.277.4.jar
 
-# Downloading Jenkins CLI
-cp /var/cache/jenkins/war/WEB-INF/lin/cli-2.277.4.jar /tmp/cli-2.277.4.jar
-
-# Installing Jenkins Plugins and restart Jenkins
-#wget http://localhost:8080/jnplJars/jenkins-cli.jar
-java -jar jenkins-cli.jar -s "http://localhost:8080/" -auth ${jenkins_user}:${jenkins_pass} install-plugin git github terraform:1.0.9 ssh:2.6.1 job-dsl:1.76 workflow-aggregator:2.6 blueocean:1.21.0 pipeline-maven chucknorris:1.2 htmlpublisher:1.21 buildgraph-view:1.8 copyartifact:1.43 jacoco:3.0.4 greenballs locale:1.4 envinject:2.3.0 -restart
+sleep 50
+java -jar /tmp/cli-2.277.4.jar -s http://localhost:8080/ -auth admin:Qwerty123! install-plugin git:4.7.1 -restart
+sleep 90
+java -jar /tmp/cli-2.277.4.jar -s http://localhost:8080/ -auth admin:Qwerty123! restart 
