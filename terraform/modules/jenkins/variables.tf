@@ -64,3 +64,5 @@ variable "health_check_path" {
   description = "The URL the ELB should use for health checks. e.g. /health"
   default     = "/"
 }
+variable "s3_address" {}
+variable "iam_profile" {}
