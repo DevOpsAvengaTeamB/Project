@@ -46,6 +46,8 @@ module "jenkins" {
   subnet-priv-b-id               = module.network.subnet-priv-b-id
   jenkins_user                   = var.jenkins_user
   jenkins_pass                   = var.jenkins_pass
+  s3_address                     = module.frontend.s3_address
+  iam_profile                    = module.frontend.iam_profile  
 }
  
 module "frontend" {
