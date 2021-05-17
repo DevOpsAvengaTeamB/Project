@@ -35,10 +35,11 @@
     <hudson.tasks.Shell>
       <command>#!/bin/bash
 cd frontend
-sed -i -e &apos;s/localhost:8080/api\.domain/g&apos; src/environments/environment.ts
+#sed -i -e 's/localhost:8080/api\.domain/g' src/environments/environment.ts
 npm install
-ng build
-aws s3 cp nnnnnnnn s3://bucket</command>
+ng build --prod
+aws s3 cp --recursive dist/shop s3://$s3_address/
+aws s3 cp nginx/default.conf s3://$s3_address/</command>
       <configuredLocalRules/>
     </hudson.tasks.Shell>
   </builders>
