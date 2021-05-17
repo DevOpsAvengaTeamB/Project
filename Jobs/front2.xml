@@ -38,7 +38,7 @@ cd frontend
 #sed -i -e 's/localhost:8080/api\.domain/g' src/environments/environment.ts
 npm install
 ng build --prod
-aws s3 cp --recursive dist/shop s3://$s3_address/
+aws s3 cp --recursive dist s3://$s3_address/
 aws s3 cp nginx/default.conf s3://$s3_address/</command>
       <configuredLocalRules/>
     </hudson.tasks.Shell>
