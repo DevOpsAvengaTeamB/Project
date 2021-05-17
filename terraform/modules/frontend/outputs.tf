@@ -22,6 +22,10 @@ variable "alb-arn" {
 variable "aws_alb_listener-arn" {
   type = string
 }
-#output "web_private_ip" {
-#  value = aws_instance.web.private_ip
-#}
+output "s3_address" {
+  value = aws_s3_bucket.myBucket.bucket
+}
+output "iam_profile" {
+  value = aws_iam_instance_profile.front_profile.id
+}
+
