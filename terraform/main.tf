@@ -1,8 +1,8 @@
 # SET PROVIDER - AMAZON WEB SERVICES
 provider "aws" {
   region     = var.aws-region
-  access_key = var.access_key
-  secret_key = var.secret_key
+  #access_key = var.access_key
+  #secret_key = var.secret_key
 }
 
 terraform {
