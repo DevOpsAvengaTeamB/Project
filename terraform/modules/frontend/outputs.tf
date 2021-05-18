@@ -28,4 +28,9 @@ output "s3_address" {
 output "iam_profile" {
   value = aws_iam_instance_profile.front_profile.id
 }
-
+output "iam_instance_profile" {
+  value = aws_iam_instance_profile.front_profile.id
+}
+output "s3_bucket" {
+  value = aws_s3_bucket.myBucket.bucket
+}
