@@ -4,16 +4,14 @@ sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.l
 apt update
 apt install default-jdk -y
 apt install jenkins -y
-#apt install npm -y
-#apt purge nodejs -y
-#node -v
+apt install nodejs -y
+apt install npm -y
+npm cache clean -f
+npm install -g n
+n stable
+PATH="$PATH"
 apt install git -y
 apt install awscli -y
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash 
-source ~/.bashrc
-nvm install v12.14.1
-nvm use v12.14.1
-node -v
 npm install -g @angular/cli
 systemctl enable jenkins.service
 systemctl stop jenkins.service
