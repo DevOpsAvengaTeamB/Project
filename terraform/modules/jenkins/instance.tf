@@ -81,7 +81,11 @@ resource "aws_alb_listener" "alb_jenkins_http" {
   load_balancer_arn = aws_alb.elb.arn
   port              = "80"
   protocol          = "HTTP"
-
+  condition {
+    path_pattern {
+      values = ["/jenkins/"]
+    }
+  }
   default_action {
     target_group_arn = aws_alb_target_group.target_group.arn
     type             = "forward"
