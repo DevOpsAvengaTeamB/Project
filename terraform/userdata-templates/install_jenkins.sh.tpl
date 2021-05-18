@@ -57,6 +57,11 @@ public createGlobalEnvironmentVariables(String key, String value){
        instance.save()
 }
 createGlobalEnvironmentVariables('s3_address','${aws_s3_bucket}')
+createGlobalEnvironmentVariables('backend_ip','${backend_ip}')
+createGlobalEnvironmentVariables('dbuser','${db_user}')
+createGlobalEnvironmentVariables('dbpass','${db_pass}')
+createGlobalEnvironmentVariables('dburl','${db_url}')
+createGlobalEnvironmentVariables('dbname','${db_name}')
 EOF
 
 echo 'JENKINS_ARGS="--prefix=/jenkins"' >> /etc/default/jenkins
@@ -64,10 +69,12 @@ systemctl restart jenkins.service
 cp /var/cache/jenkins/war/WEB-INF/lib/cli-2.277.4.jar /tmp/cli-2.277.4.jar
 
 sleep 50
-java -jar /tmp/cli-2.277.4.jar -s http://localhost:8080/jenkins/ -auth admin:Qwerty123! install-plugin git:4.7.1 restart
+java -jar /tmp/cli-2.277.4.jar -s http://localhost:8080/jenkins/ -auth admin:Qwerty123! install-plugin git:4.7.1 -restart
 sleep 90
 java -jar /tmp/cli-2.277.4.jar -s http://localhost:8080/jenkins/ -auth admin:Qwerty123! restart 
 git clone https://github.com/DevOpsAvengaTeamB/Project.git
 sleep 60
 java -jar /tmp/cli-2.277.4.jar -s http://localhost:8080/jenkins/ -auth admin:Qwerty123! create-job frontend < Project/Jobs/front2.xml
+java -jar /tmp/cli-2.277.4.jar -s http://localhost:8080/ -auth admin:Qwerty123! create-job backend < Project/Jobs/backend-config.xml
 java -jar /tmp/cli-2.277.4.jar -s http://localhost:8080/jenkins/ -auth admin:Qwerty123! build frontend
+java -jar /tmp/cli-2.277.4.jar -s http://localhost:8080/ -auth admin:Qwerty123! build backend
