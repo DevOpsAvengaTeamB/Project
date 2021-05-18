@@ -1,4 +1,3 @@
-# Define the security group for rds
 resource "aws_security_group" "For_RDS"{
  name = "For RDS"
  description = "Allow traffic from Backend"
@@ -23,7 +22,7 @@ resource "random_password" "password" {
 }
 
 resource "aws_db_subnet_group" "DB_subnet" {
-  subnet_ids = [subnet-priv-a-id, subnet-priv-b-id]
+  subnet_ids = [var.subnet-priv-a-id, var.subnet-priv-b-id]
 
   tags = {
     Name = "My DB subnet group"
@@ -43,7 +42,6 @@ resource "aws_db_instance" "postgresql" {
     vpc_security_group_ids = [aws_security_group.For_RDS.id]
     storage_type = "gp2"
     db_subnet_group_name = aws_db_subnet_group.DB_subnet.name
-    backup_retention_period = "3"
-    backup_window = "00:00-00:30"
+    skip_final_snapshot  = true
     publicly_accessible = false
 }
