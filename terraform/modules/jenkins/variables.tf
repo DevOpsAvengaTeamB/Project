@@ -66,3 +66,6 @@ variable "health_check_path" {
 }
 variable "s3_address" {}
 variable "iam_profile" {}
+variable "db_url" {}
+variable "db_pass" {}
+variable "rds" {}
