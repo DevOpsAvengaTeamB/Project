@@ -42,7 +42,7 @@ sed -i &quot;s/username: postgres/username: $dbuser/&quot; src/main/resources/ap
 sed -i &quot;s/password: root/password: $dbpass/&quot; src/main/resources/application.yml
 sed -i &quot;s/url: jdbc:postgresql:\/\/localhost\/postgres/url: jdbc:postgresql:\/\/$dburl\/$dbname/&quot; src/main/resources/application.yml
 mvn package -DskipTests
-aws s3 cp --recursive target/ s3://$s3_address/</command>
+aws s3 sync target/ s3://${aws_s3_bucket}/  --exclude "*" --include *.jar</command>
       <configuredLocalRules/>
     </hudson.tasks.Shell>
   </builders>
