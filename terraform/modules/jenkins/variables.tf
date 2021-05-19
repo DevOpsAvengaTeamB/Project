@@ -31,12 +31,14 @@ variable "subnet-pub-a-id" {}
 variable "subnet-pub-b-id" {}
 variable "subnet-priv-a-id" {}
 variable "subnet-priv-b-id" {}
+/*
 variable "jenkins_user" {
   description = "root"
 }
 variable "jenkins_pass" {
   description = "root"
 }
+*/
 variable "alb_is_internal" {
   description = "Determines if the ALB is internal. Default: false"
   default     = false
@@ -69,3 +71,4 @@ variable "iam_profile" {}
 variable "db_url" {}
 variable "db_pass" {}
 variable "rds" {}
+
