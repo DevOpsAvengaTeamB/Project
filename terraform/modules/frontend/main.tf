@@ -22,7 +22,7 @@ resource "aws_security_group" "frontend" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["192.168.0.0/16"]
   }
 
   
@@ -148,8 +148,9 @@ resource "aws_autoscaling_group" "web" {
   depends_on = [aws_launch_configuration.frontend]
   min_size             = 1
   desired_capacity     = 2
-  max_size             = 4
+  max_size             = 2
   health_check_type    = "ELB"
+  health_check_grace_period = 1200
   launch_configuration = aws_launch_configuration.frontend.name
   enabled_metrics = [
     "GroupMinSize",
