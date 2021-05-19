@@ -38,9 +38,9 @@
     <hudson.tasks.Shell>
       <command>#!/bin/bash
 cd backend/
-sed -i &quot;s/username: postgres/username: $dbuser/&quot; src/main/resources/application.yml
-sed -i &quot;s/password: root/password: $dbpass/&quot; src/main/resources/application.yml
-sed -i &quot;s/url: jdbc:postgresql:\/\/localhost\/postgres/url: jdbc:postgresql:\/\/$dburl\/$dbname/&quot; src/main/resources/application.yml
+sed -i &quot;s/username: postgres/username: Bravo/&quot; src/main/resources/application.yml
+sed -i &quot;s/password: root/password: $db_pass/&quot; src/main/resources/application.yml
+sed -i &quot;s/url: jdbc:postgresql:\/\/localhost\/postgres/url: jdbc:postgresql:\/\/$db_url\/BackendDB/&quot; src/main/resources/application.yml
 mvn package -DskipTests
 aws s3 sync target/ s3://$s3_address/  --exclude "*" --include *.jar</command>
       <configuredLocalRules/>
