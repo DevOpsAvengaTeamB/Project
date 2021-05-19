@@ -22,7 +22,7 @@ resource "aws_security_group" "frontend" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["192.168.0.0/16"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   
@@ -50,7 +50,7 @@ resource "aws_launch_configuration" "frontend" {
   image_id = data.aws_ami.ubuntu.id 
   instance_type = "t2.micro"
   security_groups = [aws_security_group.frontend.id]
-  #key_name = "key"
+  key_name = "key"
   user_data = "${data.template_file.user_data.rendered}"
   #user_data = file("./modules/frontend/userdata.sh")
   iam_instance_profile = aws_iam_instance_profile.front_profile.id
@@ -86,7 +86,7 @@ EOF
 
 resource "aws_iam_instance_profile" "front_profile" {
   name = "front_profile"
-  role = "s3read"
+  role = aws_iam_role.s3read.name
 }
 
 resource "aws_iam_role_policy" "s3read" {
@@ -112,6 +112,7 @@ EOF
 
 resource "aws_lb_listener_rule" "front_rule" {
   listener_arn = var.aws_alb_listener-arn
+  priority     = 3
   action {
     type             = "forward"
     target_group_arn = aws_alb_target_group.frontend.arn
