@@ -1,8 +1,3 @@
-variable "vpc_id" {
-    description = "ID vpc"
-    type = string
-}
-
 variable "ami" {
     description="The type of ami (Ubuntu 20.04 ) eu-west-3"
     type = string
@@ -14,17 +9,21 @@ variable "instance_type" {
     type = string
     default="t2.medium"
 }
-
-variable "subnet_id"{
-    description = "Runge of subnets"
+variable "vpc-id" {
+  type = string
 }
-
-
-variable "public_subnet_id"{
-    description = "Public subnet a for lb"
+variable "subnet-priv-a-id" {
+  type = string
 }
-
-
-variable "public_subnet_b_id"{
-   description = "Public subnet b for lb"
+variable "subnet-priv-b-id" {
+  type = string
+}
+variable "alb-id" {
+  type = string
+}
+variable "alb-arn" {
+  type = string
+}
+variable "aws_alb_listener-arn" {
+  type = string
 }

@@ -1,8 +1,8 @@
-
+/*
 resource "aws_security_group" "loadbalancer" {
   name="Loadbalancer_Bravo"
   description="Grafana and Kibana"
-  vpc_id=var.vpc_id
+  vpc_id=var.vpc-id
   ingress {
     protocol  = "-1"
     self      = true
@@ -42,35 +42,13 @@ resource "aws_security_group" "loadbalancer" {
 }
 
 
-# create-load-balancer 
 
-resource "aws_lb" "monitoring" {
-  name               = "monitoring"
-  internal           = false
-  load_balancer_type = "application"
-  security_groups    = [aws_security_group.loadbalancer.id]
-  subnets            = ["${var.public_subnet_a_id}", "${var.public_subnet_b_id}"]
-
-  enable_deletion_protection = true
-
-  access_logs {
-    bucket  = aws_s3_bucket.lb_logs.bucket
-    prefix  = "test-lb"
-    enabled = true
-  }
-
-  tags = {
-    Name = "LB monitoring"
-  }
-}
-
-# create target group
 
 resource "aws_lb_target_group" "monitoring" {
-  name     = "${var.alb_name}-tg"
+  name     = "monitoring-tg"
   port     = 3000
   protocol = "HTTP"
-  target_type = ${aws_instance.ec2_instance_monitoring.id}
+  target_type = aws_instance.ec2_instance_monitoring.ip
   vpc_id   = var.vpc-id
 
   tags={
@@ -79,10 +57,10 @@ resource "aws_lb_target_group" "monitoring" {
 }
 
 resource "aws_lb_target_group" "logging" {
-  name     = "${var.alb_name}-tg"
+  name     = "loging-tg"
   port     = 5601
   protocol = "HTTP"
-  target_type = ${aws_instance.ec2_instance_logging.id}
+  target_type = aws_instance.ec2_instance_logging.ip
   vpc_id   = var.vpc-id
 
   tags={
@@ -92,32 +70,8 @@ resource "aws_lb_target_group" "logging" {
 
 
 
-resource "aws_lb_listener" "monitoring" {
-  load_balancer_arn = aws_lb.monitoring.arn
-  port              = "3000"
-  protocol          = "HTTP"
-  
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.monitoring.arn
-  }
-}
-
-resource "aws_lb_listener" "logging" {
-  load_balancer_arn = aws_lb.logging.arn
-  port              = "5601"
-  protocol          = "HTTP"
-
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.logging.arn
-  }
-}
-
-# Weighted Forward action
-
 resource "aws_lb_listener_rule" "monitoring_rule" {
-  listener_arn = aws_lb_listener.monitoring.arn
+  listener_arn = var.aws_alb_listener-arn
   priority     = 100
 
   action {
@@ -143,14 +97,14 @@ resource "aws_lb_listener_rule" "monitoring_rule" {
 }
 
 resource "aws_lb_listener_rule" "logging_rule" {
-  listener_arn = aws_lb_listener.logging.arn
+  listener_arn = var.aws_alb_listener-arn
   priority     = 100
 
   action {
     type = "forward"
     forward {
       target_group {
-        arn    = aws_lb_target_group.loging.arn
+        arn    = aws_lb_target_group.logging.arn
         weight = 100
       }
 
@@ -167,3 +121,4 @@ resource "aws_lb_listener_rule" "logging_rule" {
     }
   }
 }
+*/

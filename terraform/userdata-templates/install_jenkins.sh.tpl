@@ -59,8 +59,6 @@ public createGlobalEnvironmentVariables(String key, String value){
 }
 createGlobalEnvironmentVariables('s3_address','${aws_s3_bucket}')
 createGlobalEnvironmentVariables('backend_dns','${backend_dns}')
-createGlobalEnvironmentVariables('db_url','${db_url}')
-createGlobalEnvironmentVariables('db_pass','${db_pass}')
 EOF
 
 echo 'JENKINS_ARGS="--prefix=/jenkins"' >> /etc/default/jenkins

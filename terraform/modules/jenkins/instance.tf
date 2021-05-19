@@ -4,12 +4,12 @@ data "template_file" "user_data1" {
   vars = {
       aws_s3_bucket = var.s3_address
       backend_dns   = aws_alb.elb.dns_name
-      db_url        = var.db_url
-      db_pass       = var.db_pass
+      #db_url        = var.db_url
+      #db_pass       = var.db_pass
   }
 }
 resource "aws_launch_template" "jenkins-launch-tmpl" {
-  depends_on = [ var.rds ]
+  #depends_on = [ var.rds ]
   name                    = "Jenkins"
   image_id                = var.instance-ami[1]
   instance_type           = var.instance-type[1]

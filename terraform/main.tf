@@ -48,9 +48,9 @@ module "jenkins" {
   #jenkins_pass                   = var.jenkins_pass
   s3_address                     = module.frontend.s3_address
   iam_profile                    = module.frontend.iam_profile 
-  db_url                         = module.backend.db_url
-  db_pass                        = module.backend.db_pass
-  rds                            = module.backend.rds
+  #db_url                         = module.backend.db_url
+  #db_pass                        = module.backend.db_pass
+  #rds                            = module.backend.rds
 }
  
 module "frontend" {
@@ -63,8 +63,10 @@ module "frontend" {
   alb-id = module.jenkins.alb-id
   alb-arn = module.jenkins.alb-arn
   aws_alb_listener-arn =  module.jenkins.aws_alb_listener-arn
+  elastic_ip           =  module.monitoring_loging.instance_logging_private_ip
+  prometheus_ip        =  module.monitoring_loging.instance_monitoring_private_ip
 }
-
+/*
 module "backend" {
   source = "./modules/Backend/"
   vpc-id = module.network.vpc-id
@@ -78,10 +80,13 @@ module "backend" {
   alb-arn = module.jenkins.alb-arn
   aws_alb_listener-arn =  module.jenkins.aws_alb_listener-arn 
   }
-
+*/
 module "monitoring_loging"{
     source = "./modules/monitoring"
-    #version = "0.3"
-    vpc_id = module.network.vpc-id
-    subnet_id = module.network.subnet-priv-a-id
+    vpc-id = module.network.vpc-id
+    subnet-priv-a-id = module.network.subnet-priv-a-id
+    subnet-priv-b-id = module.network.subnet-priv-b-id
+    alb-id = module.jenkins.alb-id
+    alb-arn = module.jenkins.alb-arn
+    aws_alb_listener-arn =  module.jenkins.aws_alb_listener-arn
   }

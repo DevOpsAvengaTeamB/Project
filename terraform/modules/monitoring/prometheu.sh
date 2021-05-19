@@ -52,7 +52,7 @@ scrape_configs:
   - job_name: 'node'
     scrape_interval: 1s
     static_configs:
-      - targets: ['localhost:9100']" |    tee /etc/prometheus/prometheus.yml
+      - targets: ['0.0.0.0:9100']" |    tee /etc/prometheus/prometheus.yml
 
 
 # prometheus.service
@@ -98,7 +98,7 @@ systemctl start node_exporter
 
 # grafana installation
 
-apt-get install -y adduser libfontconfig
+apt-get install -y libfontconfig
 dpkg -i grafana_7.5.5_amd64.deb
 
 /bin/systemctl daemon-reload

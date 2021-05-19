@@ -1,4 +1,6 @@
 #!/bin/bash 
+echo ${elastic_ip}
+echo ${prometheus_ip}
 apt update
 apt install nginx -y
 apt install awscli -y
