@@ -12,6 +12,5 @@ variable "access_key" {
   description = ""
 }
 */
-variable "jenkins_user" {}
-variable "jenkins_pass" {}
-
+#variable "jenkins_user" {}
+#variable "jenkins_pass" {}
