@@ -3,9 +3,13 @@ data "template_file" "user_data1" {
 
   vars = {
       aws_s3_bucket = var.s3_address
+      backend_dns   = aws_alb.elb.dns_name
+      db_url        = var.db_url
+      db_pass       = var.db_pass
   }
 }
 resource "aws_launch_template" "jenkins-launch-tmpl" {
+  depends_on = [ var.rds ]
   name                    = "Jenkins"
   image_id                = var.instance-ami[1]
   instance_type           = var.instance-type[1]
@@ -40,7 +44,7 @@ resource "aws_autoscaling_group" "jenkins" {
   max_size         = 1
   min_size         = 1
   # vpc_zone_identifier = ["${var.subnet-pub-a-id}", "${var.subnet-pub-b-id}"]
-  vpc_zone_identifier = ["${var.subnet-priv-a-id}", "${var.subnet-priv-b-id}"]
+  vpc_zone_identifier = ["${var.subnet-pub-a-id}", "${var.subnet-pub-b-id}"]
   launch_template {
     id      = aws_launch_template.jenkins-launch-tmpl.id
     version = "$Latest"
@@ -81,18 +85,28 @@ resource "aws_alb_listener" "alb_jenkins_http" {
   load_balancer_arn = aws_alb.elb.arn
   port              = "80"
   protocol          = "HTTP"
-  condition {
-    path_pattern {
-      values = ["/jenkins/"]
-    }
-  }
   default_action {
     target_group_arn = aws_alb_target_group.target_group.arn
     type             = "forward"
   }
+}
+
+resource "aws_lb_listener_rule" "jenkins_rule" {
+  listener_arn = aws_alb_listener.alb_jenkins_http.arn
+  priority     = 1
+  action {
+    type             = "forward"
+    target_group_arn = aws_alb_target_group.target_group.arn
+
+  }
+  condition {
+    path_pattern {
+      values = ["/jenkins/*"]
+    }
+  }
+}
 
  # count = trimspace(element(split(",", var.alb_protocols), 1)) == "HTTP" || trimspace(element(split(",", var.alb_protocols), 2)) == "HTTP" ? 1 : 0
-}
 
 resource "aws_autoscaling_attachment" "asg_attachment"{
 autoscaling_group_name = aws_autoscaling_group.jenkins.id
