@@ -43,7 +43,7 @@ resource "aws_launch_configuration" "Backend" {
  name_prefix = "backend"
  image_id = data.aws_ami.ubuntu.id
  instance_type = "t2.micro"
- #key_name = "key"
+ key_name = "key"
  user_data = templatefile("./modules/Backend/userdata.sh.tpl", { s3_bucket = var.s3_bucket})
  security_groups = [aws_security_group.backend.id]
  iam_instance_profile = var.iam_instance_profile
@@ -55,6 +55,7 @@ resource "aws_launch_configuration" "Backend" {
 
 resource "aws_lb_listener_rule" "back_rule" {
   listener_arn = var.aws_alb_listener-arn
+  priority     = 2
     action {
     type             = "forward"
     target_group_arn = aws_alb_target_group.backend.arn
@@ -79,12 +80,12 @@ resource "aws_alb_target_group" "backend" {
 }
 resource "aws_autoscaling_group" "for_backend_asg" {
   launch_configuration = aws_launch_configuration.Backend.name
-  vpc_zone_identifier  = [ var.subnet-priv-a-id, var.subnet-priv-b-id]
+  vpc_zone_identifier  = [ var.subnet-pub-a-id ]
   target_group_arns = [ aws_alb_target_group.backend.arn ]
   desired_capacity = 1
-  max_size         = 2
+  max_size         = 1
   min_size         = 1
-  health_check_type    = "ELB"
+  health_check_type    = "EC2"
   tag {
     key                 = "Name"
     value               = "Back"
