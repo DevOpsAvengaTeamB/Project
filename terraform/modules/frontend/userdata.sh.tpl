@@ -2,6 +2,15 @@
 apt update
 apt install nginx -y
 apt install awscli -y
+while true; do
+  status_bucket=`aws s3 ls s3://${aws_s3_bucket}/`
+  if [ "$status_bucket" != "" ]; then
+    echo "Artifact was downloaded. Going to run backend."
+      break
+    fi
+  sleep 5
+  echo "Artifact was not found. Repeat the check after 5 seconds."
+done
 rm -rf /usr/share/nginx/html/*
 rm -rf /etc/nginx/sites-enabled/*
 aws s3 --recursive  cp s3://${aws_s3_bucket}/shop/ /usr/share/nginx/html/
