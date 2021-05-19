@@ -44,7 +44,7 @@ resource "aws_autoscaling_group" "jenkins" {
   max_size         = 1
   min_size         = 1
   # vpc_zone_identifier = ["${var.subnet-pub-a-id}", "${var.subnet-pub-b-id}"]
-  vpc_zone_identifier = ["${var.subnet-pub-a-id}", "${var.subnet-pub-b-id}"]
+  vpc_zone_identifier = ["${var.subnet-priv-a-id}", "${var.subnet-priv-b-id}"]
   launch_template {
     id      = aws_launch_template.jenkins-launch-tmpl.id
     version = "$Latest"
