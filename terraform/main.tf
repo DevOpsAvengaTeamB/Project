@@ -44,10 +44,13 @@ module "jenkins" {
   subnet-pub-b-id                = module.network.subnet-pub-b-id
   subnet-priv-a-id               = module.network.subnet-priv-a-id
   subnet-priv-b-id               = module.network.subnet-priv-b-id
-  jenkins_user                   = var.jenkins_user
-  jenkins_pass                   = var.jenkins_pass
+  #jenkins_user                   = var.jenkins_user
+  #jenkins_pass                   = var.jenkins_pass
   s3_address                     = module.frontend.s3_address
-  iam_profile                    = module.frontend.iam_profile  
+  iam_profile                    = module.frontend.iam_profile 
+  db_url                         = module.backend.db_url
+  db_pass                        = module.backend.db_pass
+  rds                            = module.backend.rds
 }
  
 module "frontend" {
@@ -61,7 +64,7 @@ module "frontend" {
   alb-arn = module.jenkins.alb-arn
   aws_alb_listener-arn =  module.jenkins.aws_alb_listener-arn
 }
-    
+
 module "backend" {
   source = "./modules/Backend/"
   vpc-id = module.network.vpc-id
@@ -75,7 +78,7 @@ module "backend" {
   alb-arn = module.jenkins.alb-arn
   aws_alb_listener-arn =  module.jenkins.aws_alb_listener-arn 
   }
-   
+
 /*module "monitoring_loging"{
     source = "./modules/monitoringloging"
     #version = "0.1"
