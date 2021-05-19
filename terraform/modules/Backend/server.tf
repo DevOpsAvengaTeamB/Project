@@ -80,7 +80,7 @@ resource "aws_alb_target_group" "backend" {
 }
 resource "aws_autoscaling_group" "for_backend_asg" {
   launch_configuration = aws_launch_configuration.Backend.name
-  vpc_zone_identifier  = [ var.subnet-pub-a-id ]
+  vpc_zone_identifier  = [ var.subnet-priv-a-id ]
   target_group_arns = [ aws_alb_target_group.backend.arn ]
   desired_capacity = 1
   max_size         = 1
