@@ -1,5 +1,6 @@
 #!/bin/bash 
 apt-get install openjdk-11-jdk -y
 apt install awscli -y
-aws s3 --recursive  cp s3://${s3_bucket}/target/ target/
-chmod 444 -R target/*
+mkdir /home/ubuntu/target
+aws s3 sync s3://${s3_bucket}/ /home/ubuntu/target  --exclude "*" --include *.jar
+java -jar /home/ubuntu/target/*.jar &
