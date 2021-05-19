@@ -36,8 +36,6 @@
       <command>#!/bin/bash
 cd frontend
 sed -i -e 's/localhost/$backend_dns/g' src/environments/environment.ts
-#sed -i -e 's/localhost/1.1.1.1/g' src/environments/environment.ts
-#sed -i -e 's/backend/1.1.1.1/g' nginx/default.conf
 npm install
 ng build --prod
 aws s3 cp --recursive dist s3://$s3_address/
@@ -48,3 +46,4 @@ aws s3 cp nginx/default.conf s3://$s3_address/</command>
   <publishers/>
   <buildWrappers/>
 </project>
+
