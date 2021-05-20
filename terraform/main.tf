@@ -78,10 +78,11 @@ module "backend" {
   alb-arn = module.jenkins.alb-arn
   aws_alb_listener-arn =  module.jenkins.aws_alb_listener-arn 
   }
-
+/*
 module "monitoring_loging"{
     source = "./modules/monitoring"
     #version = "0.3"
     vpc_id = module.network.vpc-id
     subnet_id = module.network.subnet-priv-a-id
   }
+*/
