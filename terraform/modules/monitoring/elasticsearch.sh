@@ -14,8 +14,6 @@ dpkg -i elasticsearch-7.12.1-amd64.deb
 # Filebeat 
 
 wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.12.1-amd64.deb
-wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.12.1-amd64.deb.sha512
-shasum -a 512 -c filebeat-7.12.1-amd64.deb.sha512 
 dpkg -i filebeat-7.12.1-amd64.deb
 
 
@@ -43,12 +41,9 @@ s/#server.host: "localhost"/server.host: 0.0.0.0/;
 s/#elasticsearch.hosts: ["http:\/\/localhost:9200"]/elasticsearch.hosts: ["http:\/\/localhost:9200"]/;
 s/#pid.file: \/run\/kibana\/kibana.pid/pid.file: \/run\/kibana\/kibana.pid/' /etc/kibana/kibana.yml
 
-/bin/systemctl daemon-reload
-/bin/systemctl enable kibana.service
+systemctl daemon-reload
+systemctl enable kibana.service
 systemctl start kibana.service
-
-
-
 
 
 systemctl enable filebeat.service
