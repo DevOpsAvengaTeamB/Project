@@ -13,7 +13,7 @@ resource "aws_launch_template" "jenkins-launch-tmpl" {
   name                    = "Jenkins"
   image_id                = var.instance-ami[1]
   instance_type           = var.instance-type[1]
-  key_name = "key"
+  #key_name = "key"
   iam_instance_profile {
   name = "front_profile"
   }
@@ -59,7 +59,7 @@ resource "aws_alb" "elb" {
   security_groups = ["${var.id-sg-elb}"]
   internal        = var.alb_is_internal
 
-  tags = map("Name", format("%s-tg", var.alb_name))
+  tags = tomap({"Name"="var.alb_name"})
 }
 
 resource "aws_alb_target_group" "target_group" {
@@ -78,7 +78,7 @@ resource "aws_alb_target_group" "target_group" {
   }
 
 
-  tags = map("Name", format("%s-tg", var.alb_name))
+  tags = tomap({"Name"="var.alb_name"})
 }
 
 resource "aws_alb_listener" "alb_jenkins_http" {
