@@ -41,6 +41,8 @@ s/#server.host: "localhost"/server.host: 0.0.0.0/;
 s/#elasticsearch.hosts: ["http:\/\/localhost:9200"]/elasticsearch.hosts: ["http:\/\/localhost:9200"]/;
 s/#pid.file: \/run\/kibana\/kibana.pid/pid.file: \/run\/kibana\/kibana.pid/' /etc/kibana/kibana.yml
 
+echo 'server.basePath: "/kibana"' >> /etc/kibana/kibana.yml
+
 systemctl daemon-reload
 systemctl enable kibana.service
 systemctl start kibana.service

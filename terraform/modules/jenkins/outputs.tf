@@ -10,3 +10,8 @@ output "aws_alb_listener-arn" {
   description = "The ID of security group for Jenkins"
   value       = aws_alb_listener.alb_jenkins_http.arn
 }
+
+output "aws_alb_dns" {
+  description = "Domain"
+  value       = aws_alb.elb.dns_name
+}

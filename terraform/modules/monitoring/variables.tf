@@ -27,3 +27,7 @@ variable "alb-arn" {
 variable "aws_alb_listener-arn" {
   type = string
 }
+
+variable "aws_alb_dns" {
+  type = string
+}

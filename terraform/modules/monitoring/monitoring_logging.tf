@@ -84,11 +84,12 @@ resource "aws_security_group" "monitoring" {
 resource "aws_instance" "ec2_instance_monitoring" {
     ami=var.ami
     instance_type=var.instance_type
-    #key_name="key"
+    key_name="key"
     vpc_security_group_ids=["${aws_security_group.monitoring.id}"]
     subnet_id=var.subnet-priv-a-id
     monitoring=true
-    user_data=file("${path.module}/prometheu.sh")
+    #user_data=file("${path.module}/prometheu.sh")
+    user_data = templatefile("./modules/monitoring/prometheu.sh.tpl", {aws_alb_dns = var.aws_alb_dns})
 
     tags={
         Name="prometheus-server-teamB"
@@ -98,11 +99,12 @@ resource "aws_instance" "ec2_instance_monitoring" {
 resource "aws_instance" "ec2_instance_logging" {
     ami=var.ami
     instance_type=var.instance_type
-    #key_name="key"
+    key_name="key"
     vpc_security_group_ids=["${aws_security_group.monitoring.id}"]
     subnet_id=var.subnet-priv-a-id
     monitoring=true
-    user_data=file("${path.module}/elasticsearch.sh")
+    #user_data=file("${path.module}/elasticsearch.sh")
+    user_data = templatefile("./modules/monitoring/elasticsearch.sh.tpl", {aws_alb_dns = var.aws_alb_dns})
 
     tags={
         Name="elk-stack-teamB"

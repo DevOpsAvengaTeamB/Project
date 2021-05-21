@@ -197,5 +197,6 @@ data "template_file" "user_data" {
       aws_s3_bucket = "${aws_s3_bucket.myBucket.bucket}"
       elastic_ip = var.elastic_ip
       prometheus_ip = var.prometheus_ip
+      
   }
 }

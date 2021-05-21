@@ -43,7 +43,7 @@ chown node_exporter:node_exporter /usr/local/bin/node_exporter
 # prometheus.yml
 
 echo "global:
-  scrape_interval: 1s
+  scrape_interval: 10s
 scrape_configs:
   - job_name: 'prometheus'
     scrape_interval: 1s
@@ -108,10 +108,10 @@ dpkg -i grafana_7.5.5_amd64.deb
 
 #grafana yml
 
-# echo "[server]
-# domain = ec2-3-67-194-16.eu-central-1.compute.amazonaws.com
-# root_url = %(protocol)s://%(domain)s:%(http_port)s/grafana/
-# serve_from_sub_path = true" | tee /etc/grafana/grafana.ini
+echo "[server]
+domain = ${aws_alb_dns}
+root_url = %(protocol)s://%(domain)s/grafana/
+serve_from_sub_path = true" | tee /etc/grafana/grafana.ini
 
 # sed -i "
 # s/;domain = localhost/domain = ${}/;
@@ -141,7 +141,7 @@ datasources:
         - name: traceID
           url: 'http://localhost:3000/explore?orgId=1&left=%5B%22now-1h%22,%22now%22,%22Jaeger%22,%7B%22query%22:%22$${__value.raw}%22%7D%5D'" | tee /etc/grafana/provisioning/datasources/datasource.yml
 
-wget https://grafana.com/api/dashboards/13978/revisions/1/download -O /etc/grafana/provisioning/dashboards/nodes_rev1.json
+
 
 #grafana dashboards
 
@@ -171,7 +171,10 @@ providers:
       foldersFromFilesStructure: true" | tee /etc/grafana/provisioning/dashboards/dashboard.yml
 
 
-/bin/systemctl restart grafana-server
+#get dashboard
+wget https://grafana.com/api/dashboards/13978/revisions/1/download -O /etc/grafana/provisioning/dashboards/nodes_rev1.json
+
+systemctl restart grafana-server
 
 
 

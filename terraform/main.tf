@@ -89,4 +89,5 @@ module "monitoring_loging"{
     alb-id = module.jenkins.alb-id
     alb-arn = module.jenkins.alb-arn
     aws_alb_listener-arn =  module.jenkins.aws_alb_listener-arn
+    aws_alb_dns = module.jenkins.aws_alb_dns
   }
