@@ -112,7 +112,7 @@ EOF
 
 resource "aws_lb_listener_rule" "front_rule" {
   listener_arn = var.aws_alb_listener-arn
-  priority     = 3
+  priority     = 10
   action {
     type             = "forward"
     target_group_arn = aws_alb_target_group.frontend.arn
